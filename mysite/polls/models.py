@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-
+from django.contrib import admin
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -12,7 +12,7 @@ class Question(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
-        
+
     def test_was_published_recently_with_old_question(self):
         """
         was_published_recently() returns False for questions whose pub_date
@@ -30,6 +30,15 @@ class Question(models.Model):
         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
+    
+    @admin.display(
+        boolean=True,
+        ordering='pub_date',
+        description='Published Recently?',
+    )
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 
 class Choice(models.Model):

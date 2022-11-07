@@ -1,3 +1,8 @@
+# INF 601 - Advanced Python
+# Thomas Kerley
+# Mini Project 3 - Flask
+# Due date: 11.06.2022
+
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os

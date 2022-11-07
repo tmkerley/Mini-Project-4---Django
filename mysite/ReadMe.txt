@@ -4,6 +4,8 @@
 # Due date: 11.06.2022
 
 
+### We’ve only just scratched the surface with this intro (in fact, if you’ve read every single word, you’ve read about 5% of the overall documentation).
+
 ## A description of what the project is for.
 
     A tutorial of Django framework in conjunction with Bootstrap. Compared to

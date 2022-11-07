@@ -1,9 +1,19 @@
 {% extends "admin/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Results</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'polls/css/bootstrap.css' %}">
+    </head>
+    <body>
+        {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | MySite - Admin {% endblock %}
 
-{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | MySite - Admin {% endblock %}
+        {% block branding %}
+        <h1 id="site-name"><a href="{% url 'admin:index' %}">Polls Administration</a></h1>
+        {% endblock %}
 
-{% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">Polls Administration</a></h1>
-{% endblock %}
-
-{% block nav-global %}{% endblock %}
+        {% block nav-global %}{% endblock %}
+    </body>
+</html>

@@ -2,19 +2,30 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Results</title>
+        <meta name="description" content="Polls index">
+        <meta name="author" content="Thomas Kerley">
+        <meta name="class" content="INF 601 - Fall 2022">
+        <title>{% block title %}{% endblock %}</title>
         {% load static %}
-        <link rel="stylesheet" href="{% static 'polls/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
     </head>
     <body>
-    {% if latest_question_list %}
-        <ul>
-        {% for question in latest_question_list %}
-            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %}
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <ul>
+                <li><a href='admin'>Admin</a></li>
+                <li><a href='polls'>Polls</a></li>
+            </ul>
+        </nav>
+        <div class="container">
+        {% if latest_question_list %}
+            <ul>
+            {% for question in latest_question_list %}
+                <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No polls are available.</p>
+        {% endif %}
+        </div>
     </body>
 </html>

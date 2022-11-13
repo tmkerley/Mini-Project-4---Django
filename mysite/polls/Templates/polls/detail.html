@@ -1,61 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Hero Page">
-        <meta name="author" content="Thomas Kerley">
-        <meta name="class" content="INF 601 - Fall 2022">
-        <title>Results</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'polls/css/bootstrap.css' %}">
-    </head>
-    <body class="d-flex h-100 text-center text-bg-dark bg-dark">
-        <div class="container">
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href='admin'>Admin</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href='polls'>Polls</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <main class="container">
-                <div class="d-flex flex-column alight-items-stretch flex-shrink-0" style="width: 380px;">
-                    <span class="fs-5 fw-semibold">Questions</span>
-                    <div class="bi pe-none me-2" width="30" height="24">
-                        {% for i in question.question_set.all %}
-                            <a herf="{% url question.id %}">{{ question.question_text }}</a>
-                        {% endfor %}
-                    </div>
-                </div
-                <div class="bg-dark p-5 rounded">
-                    <!-- <h1>{{ question.question_text }}</h1>
-                    <ul class="list-group">
-                    {% for choice in question.choice_set.all %}
-                        <li class="list-group-item">{{ choice.choice_text }}</li>
-                    {% endfor %}
-                    </ul> -->
+{% extends "polls/index.html" %}
+{% load i18n static %}
+{% block title %}
+    Detail - {{ site_title }}
+{% endblock %}
 
-                    <form action="{% url 'polls:vote' question.id %}" method="post">
-                        {% csrf_token %}
-                        <fieldset>
-                            <legend><h1>{{ question.question_text }}</h1></legend>
-                            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-                            {% for choice in question.choice_set.all %}
-                                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-                            {% endfor %}
-                        </fieldset>
-                        <input type="submit" value="Vote">
-                    </form>
-                </div>
-            </main>
+{% block main %} 
+    <main class="container d-flex h-100">   
+        <div class="column">
+            <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+                <h2>Questions</h2>
+                <hr>
+                {% for question in question.question_text %}
+                    <div class="bi pe-none me-2" width="30" height="24">
+                        <a herf="">{{ question.question_text }}</a>
+                    </div>
+                {% empty %}
+                    <div class="bi pe-none me-2" width="30" height="24">
+                        No questions to list.
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </body>
-</html>
+        <div class="column p-5 rounded">
+            <form action="{% url 'polls:vote' question.id %}" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <legend><h1>{{ question.question_text }}</h1></legend>
+                    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                    {% for choice in question.choice_set.all %}
+                        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                    {% endfor %}
+                </fieldset>
+                <input type="submit" value="Vote">
+            </form>
+        </div>
+    </main>
+{% endblock %}
+

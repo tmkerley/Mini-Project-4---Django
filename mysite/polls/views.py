@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-
+from django.utils.functional import LazyObject
 from .models import Choice, Question
 
 
@@ -22,7 +22,10 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
-    
+
+    # Text to put at the end of each page's <title>.
+    site_title = "Django site admin"
+
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.

@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Poll Results Page">
-        <meta name="author" content="Thomas Kerley">
-        <meta name="class" content="INF 601 - Fall 2022">
-        <title>Results</title>
-    </head>
-    <body>
+{% extends "polls/index.html" %}
+
+{% block main %}
     <div class="container">
         <h1>{{ question.question_text }}</h1>
 
@@ -19,5 +12,4 @@
 
         <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
     </div>
-    </body>
-</html>
+{% endblock %}

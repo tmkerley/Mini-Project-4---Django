@@ -24,7 +24,9 @@ class DetailView(generic.DetailView):
     template_name = 'polls/detail.html'
 
     # Text to put at the end of each page's <title>.
-    site_title = "Django site admin"
+    site_title = "Question Details"
+    site_title = "Question Details"
+    site_title = "Question Details"
 
     def get_queryset(self):
         """

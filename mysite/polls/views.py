@@ -25,8 +25,7 @@ class DetailView(generic.DetailView):
 
     # Text to put at the end of each page's <title>.
     site_title = "Question Details"
-    site_title = "Question Details"
-    site_title = "Question Details"
+
 
     def get_queryset(self):
         """
